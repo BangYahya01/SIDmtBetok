@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desa Montong Betok - Kecamatan Montong Gading, Kab. Lombok Timur | OpenSID</title>
+
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        opensid: {
+                            dark: '#064e3b',
+                            primary: '#059669',
+                            secondary: '#047857',
+                            accent: '#f59e0b',
+                            light: '#f0fdf4',
+                            sidebar: '#1e293b'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts Inter -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Chart.js CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <style>
+        body { font-family: 'Inter', sans-serif; background-color: #f8fafc; }
+        .ticker-wrap { overflow: hidden; white-space: nowrap; }
+        .ticker { display: inline-block; animation: ticker 32s linear infinite; }
+        @keyframes ticker { 0% { transform: translate3d(0, 0, 0); } 100% { transform: translate3d(-50%, 0, 0); } }
+        .opensid-card { background: white; border-top: 0px solid #059669; border-radius: 0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
+        .opensid-card-title { font-weight: 700; color: #0f172a; padding: 0.75rem 1rem; border-bottom: 1px solid #f1f5f9; display: flex; align-items: center; justify-content: space-between; font-size: 0.95rem; }
+        .custom-scrollbar::-webkit-scrollbar { width: 5px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: #f1f1f1; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: #059669; border-radius: 3px; }
+    </style>
+</head>
+<body class="text-slate-800 antialiased flex flex-col min-h-screen">
+
+    <!-- TOP GOV BAR -->
+    <div class="bg-emerald-950 text-emerald-100 text-xs py-1.5 px-4 border-b border-emerald-800">
+        <div class="max-w-7xl mx-auto flex flex-wrap justify-between items-center gap-2">
+            <div class="flex items-center space-x-4">
+                <span class="flex items-center gap-1.5"><i class="fa-solid fa-building-columns text-amber-400"></i> Portal Resmi Pemerintah Desa</span>
+                <span class="hidden md:inline text-emerald-400">|</span>
+                <span class="hidden md:inline"><i class="fa-solid fa-location-dot text-amber-400 mr-1"></i> Kec. Montong Gading, Kab. Lombok Timur, NTB</span>
+            </div>
+            <div class="flex items-center space-x-3">
+                <span class="text-emerald-300"><i class="fa-regular fa-clock mr-1"></i> Jam Kantor: 08:00 - 15:30 WITA</span>
+                <a href="#layanan" onclick="switchSection('layanan')" class="bg-amber-500 hover:bg-amber-600 text-slate-900 px-2 py-0.5 rounded font-bold transition">Layanan Mandiri</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN BRAND HEADER -->
+    <header class="bg-gradient-to-r from-emerald-900 via-emerald-800 to-teal-900 text-white shadow-md">
+        <div class="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="flex items-center space-x-4 cursor-pointer" onclick="switchSection('beranda')">
+                    <div class="w-16 h-16 bg-white p-1 rounded-xl shadow-md flex items-center justify-center shrink-0 border-2 border-amber-400">
+                        <!-- Lambang Kab Lombok Timur Placeholder / SVG Icon -->
+                        <div class="text-center">
+                            <i class="fa-solid fa-shield-halved text-emerald-700 text-3xl"></i>
+                            <span class="block text-[8px] font-black text-slate-700 leading-tight">LOTIM</span>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="flex items-center gap-2">
+                            <h1 class="text-2xl font-black tracking-tight uppercase text-white">Desa Montong Betok</h1>
+                            <span class="bg-emerald-700/80 text-amber-300 text-[10px] font-bold px-2 py-0.5 rounded border border-emerald-500">OpenSID v23.09</span>
+                        </div>
+                        <p class="text-xs text-emerald-200 font-medium mt-0.5">Kecamatan Montong Gading, Kabupaten Lombok Timur, Provinsi Nusa Tenggara Barat</p>
+                        <p class="text-[11px] text-amber-300/90 font-mono italic">Jl. Raden Pulesari, Kode Pos 83664</p>
+                    </div>
+                </div>
+
+                <div class="hidden lg:flex items-center gap-3">
+                    <div class="bg-white/10 backdrop-blur border border-white/20 p-2.5 rounded-lg flex items-center gap-3 text-xs">
+                        <div class="w-8 h-8 rounded-full bg-amber-400 text-slate-900 flex items-center justify-center font-bold">
+                            <i class="fa-solid fa-user-tie"></i>
+                        </div>
+                        <div>
+                            <p class="text-[10px] text-emerald-200 uppercase font-semibold">Kepala Desa</p>
+                            <p class="font-bold text-white">RONY FARICK ZIATH, S.Pd.I</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- NAVIGATION MENU BAR -->
+        <nav class="bg-emerald-950/90 border-t border-emerald-700/50">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="flex justify-between items-center h-12">
+                    <div class="flex space-x-1 font-semibold text-xs overflow-x-auto custom-scrollbar py-1">
+                        <button onclick="switchSection('beranda')" class="nav-btn bg-emerald-700 text-white px-3 py-1.5 rounded hover:bg-emerald-600 transition flex items-center gap-1.5 shrink-0"><i class="fa-solid fa-house"></i> Beranda</button>
+                        <button onclick="switchSection('profil')" class="nav-btn text-emerald-100 hover:bg-emerald-800 px-3 py-1.5 rounded transition flex items-center gap-1.5 shrink-0"><i class="fa-solid fa-address-card"></i> Profil Desa</button>
+                        <button onclick="switchSection('layanan')" class="nav-btn text-emerald-100 hover:bg-emerald-800 px-3 py-1.5 rounded transition flex items-center gap-1.5 shrink-0"><i class="fa-solid fa-file-lines"></i> Layanan Mandiri</button>
+                        <button onclick="switchSection('apbd')" class="nav-btn text-emerald-100 hover:bg-emerald-800 px-3 py-1.5 rounded transition flex items-center gap-1.5 shrink-0"><i class="fa-solid fa-chart-pie"></i> APBD Desa</button>
+                        <button onclick="switchSection('statistik')" class="nav-btn text-emerald-100 hover:bg-emerald-800 px-3 py-1.5 rounded transition flex items-center gap-1.5 shrink-0"><i class="fa-solid fa-chart-column"></i> Data Statistik</button>
+                        <button onclick="switchSection('berita')" class="nav-btn text-emerald-100 hover:bg-emerald-800 px-3 py-1.5 rounded transition flex items-center gap-1.5 shrink-0"><i class="fa-solid fa-newspaper"></i> Kabar Desa</button>
+                        <button onclick="switchSection('pengaduan')" class="nav-btn text-emerald-100 hover:bg-emerald-800 px-3 py-1.5 rounded transition flex items-center gap-1.5 shrink-0"><i class="fa-solid fa-comments"></i> Pengaduan Warga</button>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- RUNNING TEXT TICKER (TYPICAL OPENSID FEATURE) -->
+    <div class="bg-amber-400 text-slate-900 text-xs py-1.5 font-medium border-b border-amber-500 overflow-hidden flex items-center">
+        <div class="bg-slate-900 text-amber-400 px-3 py-1 text-[11px] font-bold uppercase tracking-wider shrink-0 flex items-center gap-1 z-10 shadow">
+            <i class="fa-solid fa-bullhorn text-xs animate-pulse"></i> SEKILAS INFO
+        </div>
+        <div class="ticker-wrap w-full">
+            <div class="ticker flex gap-8">
+                <span><i class="fa-solid fa-star text-slate-700 mr-1"></i> Selamat Datang di Website Resmi Desa Montong Betok, Kec. Montong Gading, Kab. Lombok Timur.</span>
+                <span><i class="fa-solid fa-star text-slate-700 mr-1"></i> Pengurusan Surat Keterangan Usaha, Domisili & SKTM dapat dilakukan secara online melalui Layanan Mandiri.</span>
+                <span><i class="fa-solid fa-star text-slate-700 mr-1"></i> Pengumuman: Lelang Tanah Pecatu Desa Montong Betok T.A 2026/2027 dibuka untuk umum.</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN CONTAINER WITH 2-COLUMN OPENSID LAYOUT -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6 flex-grow w-full">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+
+            <!-- LEFT COLUMN (MAIN CONTENT - 8 COLS) -->
+            <div class="lg:col-span-8 space-y-6">
+
+                <!-- SECTION: BERANDA -->
+                <section id="sec-beranda" class="space-y-6">
+                    <!-- HERO CAROUSEL BANNER -->
+                    <div class="relative bg-slate-900 rounded-xl overflow-hidden shadow-lg h-72 sm:h-80 border border-slate-200">
+                        <img id="hero-img" src="https://images.unsplash.com/photo-1500382017468-9049fed747ef?q=80&w=1200&auto=format&fit=crop" class="w-full h-full object-cover opacity-60 transition-all duration-700" alt="Desa Montong Betok">
+                        <div class="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-900/40 to-transparent p-6 flex flex-col justify-end text-white">
+                            <span id="hero-badge" class="bg-amber-500 text-slate-950 text-xs font-bold px-2.5 py-1 rounded w-fit mb-2">Kegiatan Desa</span>
+                            <h2 id="hero-title" class="text-xl sm:text-2xl font-bold leading-tight drop-shadow">Gawe Desa Praja Yatim II Desa Montong Betok</h2>
+                            <p id="hero-desc" class="text-xs sm:text-sm text-slate-200 mt-2 line-clamp-2">Kegiatan tahunan santunan anak yatim dan doa bersama seluruh tokoh agama dan aparat Desa Montong Betok.</p>
+                            
+                            <div class="flex justify-between items-center mt-4 pt-2 border-t border-white/20">
+                                <div class="flex gap-1.5" id="hero-dots">
+                                    <span onclick="setHero(0)" class="w-3 h-3 rounded-full bg-amber-400 cursor-pointer"></span>
+                                    <span onclick="setHero(1)" class="w-3 h-3 rounded-full bg-white/50 cursor-pointer"></span>
+                                    <span onclick="setHero(2)" class="w-3 h-3 rounded-full bg-white/50 cursor-pointer"></span>
+                                </div>
+                                <span class="text-[11px] text-emerald-300 font-semibold"><i class="fa-solid fa-location-dot"></i> Montong Gading, Lombok Timur</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- QUICK LINK BUTTONS -->
+                    <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                        <button onclick="switchSection('layanan')" class="bg-white hover:bg-emerald-50 p-3.5 rounded-lg border border-slate-200 shadow-sm flex flex-col items-center text-center group transition">
+                            <i class="fa-solid fa-file-circle-check text-2xl text-emerald-600 mb-1 group-hover:scale-110 transition"></i>
+                            <span class="text-xs font-bold text-slate-800">Layanan Surat</span>
+                            <span class="text-[10px] text-slate-500">Cepat & Online</span>
+                        </button>
+                        <button onclick="switchSection('apbd')" class="bg-white hover:bg-emerald-50 p-3.5 rounded-lg border border-slate-200 shadow-sm flex flex-col items-center text-center group transition">
+                            <i class="fa-solid fa-chart-line text-2xl text-amber-500 mb-1 group-hover:scale-110 transition"></i>
+                            <span class="text-xs font-bold text-slate-800">Transparansi APBD</span>
+                            <span class="text-[10px] text-slate-500">Anggaran 2026</span>
+                        </button>
+                        <button onclick="switchSection('statistik')" class="bg-white hover:bg-emerald-50 p-3.5 rounded-lg border border-slate-200 shadow-sm flex flex-col items-center text-center group transition">
+                            <i class="fa-solid fa-users text-2xl text-blue-600 mb-1 group-hover:scale-110 transition"></i>
+                            <span class="text-xs font-bold text-slate-800">Data Penduduk</span>
+                            <span class="text-[10px] text-slate-500">Statistik Demografi</span>
+                        </button>
+                        <button onclick="switchSection('pengaduan')" class="bg-white hover:bg-emerald-50 p-3.5 rounded-lg border border-slate-200 shadow-sm flex flex-col items-center text-center group transition">
+                            <i class="fa-solid fa-bullhorn text-2xl text-red-500 mb-1 group-hover:scale-110 transition"></i>
+                            <span class="text-xs font-bold text-slate-800">Lapor Desa</span>
+                            <span class="text-[10px] text-slate-500">Aspirasi Warga</span>
+                        </button>
+                    </div>
+
+                    <!-- BERITA TERBARU FEED -->
+                    <div class="opensid-card">
+                        <div class="opensid-card-title">
+                            <span><i class="fa-solid fa-newspaper text-emerald-600 mr-2"></i> Artikel & Berita Terkini</span>
+                            <button onclick="switchSection('berita')" class="text-xs text-emerald-700 hover:underline">Lihat Semua <i class="fa-solid fa-arrow-right"></i></button>
+                        </div>
+                        <div class="p-4 divide-y divide-slate-100" id="feed-berita-home">
+                            <!-- Populated via JS -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION: PROFIL DESA -->
+                <section id="sec-profil" class="hidden space-y-6">
+                    <div class="opensid-card">
+                        <div class="opensid-card-title">
+                            <span><i class="fa-solid fa-landmark text-emerald-600 mr-2"></i> Profil Desa Montong Betok</span>
+                        </div>
+                        <div class="p-5 space-y-5 text-xs sm:text-sm text-slate-700 leading-relaxed">
+                            <div class="bg-emerald-50 p-4 rounded-lg border border-emerald-200">
+                                <h3 class="font-bold text-emerald-900 text-base mb-2">Visi Desa Montong Betok</h3>
+                                <p class="italic text-emerald-800 font-medium">
+                                    "Mewujudkan Desa Montong Betok yang Sejahtera, Mandiri, Religius, Transparan, dan Berdaya Saing melalui Peningkatan Kualitas Sumber Daya Manusia dan Tata Kelola Pemerintahan yang Bermartabat."
+                                </p>
+                            </div>
+
+                            <div>
+                                <h3 class="font-bold text-slate-900 text-sm mb-2 text-emerald-800 border-b pb-1">Misi Desa</h3>
+                                <ul class="list-disc pl-5 space-y-1.5 text-xs">
+                                    <li>Meningkatkan kualitas pelayanan administrasi kependudukan berbasis Sistem Informasi Desa (OpenSID).</li>
+                                    <li>Mendorong perekonomian warga melalui optimalisasi sektor pertanian, peternakan, dan UMKM lokal.</li>
+                                    <li>Meningkatkan sarana prasarana infrastruktur jalan tani dan saluran irigasi pertanian.</li>
+                                    <li>Melestarikan nilai-nilai budaya Sasak, gotong royong, dan kegiatan keagamaan desa.</li>
+                                </ul>
+                            </div>
+
+                            <div>
+                                <h3 class="font-bold text-slate-900 text-sm mb-2 text-emerald-800 border-b pb-1">Daftar Dusun & Kepala Dusun (Kadus)</h3>
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-1">
+                                    <div class="bg-slate-50 p-3 rounded border border-slate-200 flex justify-between items-center">
+                                        <div>
+                                            <p class="font-bold text-slate-800">Dusun Lekong Rempung</p>
+                                            <p class="text-xs text-slate-500">Kadus: Feri Jayadi, S.Pd</p>
+                                        </div>
+                                        <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded">Aktif</span>
+                                    </div>
+                                    <div class="bg-slate-50 p-3 rounded border border-slate-200 flex justify-between items-center">
+                                        <div>
+                                            <p class="font-bold text-slate-800">Dusun Mujur</p>
+                                            <p class="text-xs text-slate-500">Kadus: Saroan</p>
+                                        </div>
+                                        <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded">Aktif</span>
+                                    </div>
+                                    <div class="bg-slate-50 p-3 rounded border border-slate-200 flex justify-between items-center">
+                                        <div>
+                                            <p class="font-bold text-slate-800">Dusun Temubireng</p>
+                                            <p class="text-xs text-slate-500">Kadus: Supriadi</p>
+                                        </div>
+                                        <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded">Aktif</span>
+                                    </div>
+                                    <div class="bg-slate-50 p-3 rounded border border-slate-200 flex justify-between items-center">
+                                        <div>
+                                            <p class="font-bold text-slate-800">Dusun Otak Desa</p>
+                                            <p class="text-xs text-slate-500">Kadus: Manhari</p>
+                                        </div>
+                                        <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded">Aktif</span>
+                                    </div>
+                                    <div class="bg-slate-50 p-3 rounded border border-slate-200 flex justify-between items-center sm:col-span-2">
+                                        <div>
+                                            <p class="font-bold text-slate-800">Dusun Temayang</p>
+                                            <p class="text-xs text-slate-500">Kadus: Uhel Wirahadi</p>
+                                        </div>
+                                        <span class="bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded">Aktif</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION: LAYANAN MANDIRI -->
+                <section id="sec-layanan" class="hidden space-y-6">
+                    <div class="opensid-card">
+                        <div class="opensid-card-title">
+                            <span><i class="fa-solid fa-file-pen text-emerald-600 mr-2"></i> Form Permohonan Surat Online (Layanan Mandiri)</span>
+                        </div>
+                        <div class="p-5">
+                            <form id="form-surat" onsubmit="submitSuratOnline(event)" class="space-y-4">
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 mb-1">NIK Pemohon <span class="text-red-500">*</span></label>
+                                        <input type="number" id="surat-nik" required placeholder="5203xxxxxxxxxxxx" class="w-full px-3 py-2 text-xs rounded border border-slate-300 focus:ring-2 focus:ring-emerald-500">
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 mb-1">Nama Lengkap Pemohon <span class="text-red-500">*</span></label>
+                                        <input type="text" id="surat-nama" required placeholder="Sesuai KTP" class="w-full px-3 py-2 text-xs rounded border border-slate-300 focus:ring-2 focus:ring-emerald-500">
+                                    </div>
+                                </div>
+
+                                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 mb-1">Dusun / Wilayah RT <span class="text-red-500">*</span></label>
+                                        <select id="surat-dusun" required class="w-full px-3 py-2 text-xs rounded border border-slate-300 bg-white">
+                                            <option value="Dusun Lekong Rempung">Dusun Lekong Rempung</option>
+                                            <option value="Dusun Mujur">Dusun Mujur</option>
+                                            <option value="Dusun Temubireng">Dusun Temubireng</option>
+                                            <option value="Dusun Otak Desa">Dusun Otak Desa</option>
+                                            <option value="Dusun Temayang">Dusun Temayang</option>
+                                        </select>
+                                    </div>
+                                    <div>
+                                        <label class="block text-xs font-bold text-slate-700 mb-1">Jenis Surat Yang Diajukan <span class="text-red-500">*</span></label>
+                                        <select id="surat-jenis" required class="w-full px-3 py-2 text-xs rounded border border-slate-300 bg-white">
+                                            <option value="Surat Keterangan Usaha (SKU)">Surat Keterangan Usaha (SKU)</option>
+                                            <option value="Surat Keterangan Domisili">Surat Keterangan Domisili</option>
+                                            <option value="Surat Keterangan Tidak Mampu (SKTM)">Surat Keterangan Tidak Mampu (SKTM)</option>
+                                            <option value="Surat Pengantar SKCK">Surat Pengantar SKCK</option>
+                                            <option value="Surat Keterangan Belum Menikah">Surat Keterangan Belum Menikah</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">Keperluan Permohonan <span class="text-red-500">*</span></label>
+                                    <textarea id="surat-keperluan" rows="3" required placeholder="Contoh: Persyaratan pengajuan kredit KUR / Pendaftaran Sekolah..." class="w-full px-3 py-2 text-xs rounded border border-slate-300 focus:ring-2 focus:ring-emerald-500"></textarea>
+                                </div>
+
+                                <button type="submit" class="w-full bg-emerald-700 hover:bg-emerald-800 text-white font-bold py-2.5 rounded text-xs transition flex justify-center items-center gap-2">
+                                    <i class="fa-solid fa-paper-plane"></i> Kirim Permohonan Surat
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION: TRANSPARANSI APBD DESA -->
+                <section id="sec-apbd" class="hidden space-y-6">
+                    <div class="opensid-card">
+                        <div class="opensid-card-title">
+                            <span><i class="fa-solid fa-chart-pie text-emerald-600 mr-2"></i> Transparansi APBD Desa Montong Betok T.A 2025/2026</span>
+                        </div>
+                        <div class="p-5 space-y-5">
+                            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                                <div class="bg-emerald-50 p-4 rounded border border-emerald-200">
+                                    <p class="text-[11px] font-bold text-emerald-800 uppercase">Pendapatan Desa</p>
+                                    <p class="text-lg font-black text-slate-900 mt-1">Rp 1.845.200.000</p>
+                                    <p class="text-[10px] text-emerald-700 mt-1">Realisasi: 92%</p>
+                                </div>
+                                <div class="bg-blue-50 p-4 rounded border border-blue-200">
+                                    <p class="text-[11px] font-bold text-blue-800 uppercase">Belanja Desa</p>
+                                    <p class="text-lg font-black text-slate-900 mt-1">Rp 1.790.500.000</p>
+                                    <p class="text-[10px] text-blue-700 mt-1">Terserap: 88.5%</p>
+                                </div>
+                                <div class="bg-amber-50 p-4 rounded border border-amber-200">
+                                    <p class="text-[11px] font-bold text-amber-800 uppercase">Pembiayaan / SiLPA</p>
+                                    <p class="text-lg font-black text-slate-900 mt-1">Rp 54.700.000</p>
+                                    <p class="text-[10px] text-amber-700 mt-1">Sisa Anggaran T.A</p>
+                                </div>
+                            </div>
+
+                            <div class="space-y-3">
+                                <h4 class="font-bold text-xs text-slate-800 uppercase tracking-wide">Rincian Alokasi Belanja Utama:</h4>
+                                <div>
+                                    <div class="flex justify-between text-xs font-semibold mb-1">
+                                        <span>Pembangunan Fisik & Saluran Irigasi</span>
+                                        <span>Rp 820.000.000</span>
+                                    </div>
+                                    <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                                        <div class="bg-emerald-600 h-full" style="width: 45%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-xs font-semibold mb-1">
+                                        <span>Pemberdayaan Masyarakat & Bantuan Sosial</span>
+                                        <span>Rp 450.000.000</span>
+                                    </div>
+                                    <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                                        <div class="bg-blue-600 h-full" style="width: 25%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-xs font-semibold mb-1">
+                                        <span>Penyelenggaraan Pemerintahan Desa</span>
+                                        <span>Rp 520.500.000</span>
+                                    </div>
+                                    <div class="w-full bg-slate-100 h-2 rounded-full overflow-hidden">
+                                        <div class="bg-amber-500 h-full" style="width: 30%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION: DATA STATISTIK DEMOGRAFI -->
+                <section id="sec-statistik" class="hidden space-y-6">
+                    <div class="opensid-card">
+                        <div class="opensid-card-title">
+                            <span><i class="fa-solid fa-chart-column text-emerald-600 mr-2"></i> Grafik Statistik Kependudukan</span>
+                        </div>
+                        <div class="p-5 space-y-6">
+                            <div class="h-64 relative">
+                                <canvas id="chartDusun"></canvas>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION: KABAR DESA FULL -->
+                <section id="sec-berita" class="hidden space-y-6">
+                    <div class="opensid-card">
+                        <div class="opensid-card-title">
+                            <span><i class="fa-solid fa-newspaper text-emerald-600 mr-2"></i> Arsip Kabar & Berita Desa</span>
+                        </div>
+                        <div class="p-4 divide-y divide-slate-100" id="feed-berita-full">
+                            <!-- Populated via JS -->
+                        </div>
+                    </div>
+                </section>
+
+                <!-- SECTION: PENGADUAN WARGA -->
+                <section id="sec-pengaduan" class="hidden space-y-6">
+                    <div class="opensid-card">
+                        <div class="opensid-card-title">
+                            <span><i class="fa-solid fa-comments text-emerald-600 mr-2"></i> Form Pengaduan & Aspirasi Warga</span>
+                        </div>
+                        <div class="p-5 space-y-4">
+                            <form onsubmit="submitPengaduan(event)" class="space-y-3">
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">Nama Pelapor <span class="text-red-500">*</span></label>
+                                    <input type="text" id="pengaduan-nama" required placeholder="Nama Anda" class="w-full px-3 py-2 text-xs rounded border border-slate-300">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">Kategori Laporan <span class="text-red-500">*</span></label>
+                                    <select id="pengaduan-kategori" class="w-full px-3 py-2 text-xs rounded border border-slate-300 bg-white">
+                                        <option value="Fasilitas Umum / Jalan">Fasilitas Umum / Jalan</option>
+                                        <option value="Irigasi & Pertanian">Irigasi & Pertanian</option>
+                                        <option value="Kebersihan & Sampah">Kebersihan & Sampah</option>
+                                        <option value="Layanan Publik">Layanan Publik</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold text-slate-700 mb-1">Detail Pengaduan <span class="text-red-500">*</span></label>
+                                    <textarea id="pengaduan-isi" rows="3" required placeholder="Jelaskan kendala atau aspirasi Anda secara lengkap..." class="w-full px-3 py-2 text-xs rounded border border-slate-300"></textarea>
+                                </div>
+                                <button type="submit" class="bg-slate-800 text-white font-bold px-4 py-2 rounded text-xs hover:bg-slate-900 transition">Kirim Laporan</button>
+                            </form>
+
+                            <div class="border-t pt-4">
+                                <h4 class="font-bold text-xs text-slate-800 mb-3">Laporan Warga Terkini:</h4>
+                                <div id="list-pengaduan" class="space-y-2">
+                                    <!-- Dynamic -->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+            </div>
+
+            <!-- RIGHT COLUMN (OPENSID CLASSIC SIDEBAR - 4 COLS) -->
+            <div class="lg:col-span-4 space-y-5">
+
+                <!-- WIDGET: KEPALA DESA & APARATUR -->
+                <div class="opensid-card">
+                    <div class="opensid-card-title">
+                        <span><i class="fa-solid fa-user-tie text-emerald-600 mr-2"></i> Aparatur Desa</span>
+                    </div>
+                    <div class="p-4 text-center space-y-3">
+                        <div class="relative w-28 h-28 mx-auto rounded-full overflow-hidden border-4 border-emerald-600 shadow-md">
+                            <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?q=80&w=300&auto=format&fit=crop" alt="Rony Farick Ziath" class="w-full h-full object-cover">
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-slate-900 text-sm">RONY FARICK ZIATH, S.Pd.I</h3>
+                            <p class="text-xs text-emerald-700 font-semibold">Kepala Desa Montong Betok</p>
+                            <span class="inline-block mt-1 bg-emerald-100 text-emerald-800 text-[10px] font-bold px-2 py-0.5 rounded-full"><i class="fa-solid fa-circle text-[8px] text-emerald-600 mr-1"></i> Sesuai Jam Kerja</span>
+                        </div>
+
+                        <div class="border-t border-slate-100 pt-3 text-left space-y-2 text-xs">
+                            <div class="flex justify-between items-center text-slate-600">
+                                <span>Mariani</span>
+                                <span class="font-semibold text-slate-800">Kaur TU & Umum</span>
+                            </div>
+                            <div class="flex justify-between items-center text-slate-600">
+                                <span>Baiq Ilda Ayudya</span>
+                                <span class="font-semibold text-slate-800">Staff Desa</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WIDGET: QUICK STATS -->
+                <div class="opensid-card">
+                    <div class="opensid-card-title">
+                        <span><i class="fa-solid fa-chart-line text-emerald-600 mr-2"></i> Statistik Penduduk</span>
+                    </div>
+                    <div class="p-4 grid grid-cols-2 gap-3 text-center">
+                        <div class="bg-slate-50 p-2.5 rounded border border-slate-200">
+                            <p class="text-[10px] text-slate-500 uppercase font-bold">Total Penduduk</p>
+                            <p class="text-lg font-black text-emerald-700">5.420</p>
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded border border-slate-200">
+                            <p class="text-[10px] text-slate-500 uppercase font-bold">Kepala Keluarga</p>
+                            <p class="text-lg font-black text-slate-800">1.380</p>
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded border border-slate-200">
+                            <p class="text-[10px] text-slate-500 uppercase font-bold">Laki-Laki</p>
+                            <p class="text-lg font-black text-blue-600">2.750</p>
+                        </div>
+                        <div class="bg-slate-50 p-2.5 rounded border border-slate-200">
+                            <p class="text-[10px] text-slate-500 uppercase font-bold">Perempuan</p>
+                            <p class="text-lg font-black text-pink-600">2.670</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WIDGET: AGENDA DESA -->
+                <div class="opensid-card">
+                    <div class="opensid-card-title">
+                        <span><i class="fa-solid fa-calendar-days text-emerald-600 mr-2"></i> Agenda Kegiatan</span>
+                    </div>
+                    <div class="p-4 space-y-3 text-xs">
+                        <div class="flex gap-3 items-start border-b border-slate-100 pb-2">
+                            <div class="bg-emerald-100 text-emerald-800 font-bold p-1.5 rounded text-center shrink-0 w-12">
+                                <span class="block text-sm">05</span>
+                                <span class="block text-[9px] uppercase">Okt</span>
+                            </div>
+                            <div>
+                                <p class="font-bold text-slate-800">Lelang Tanah Pecatu Desa</p>
+                                <p class="text-[10px] text-slate-500"><i class="fa-regular fa-clock"></i> 09:00 WITA - Balai Desa</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-3 items-start">
+                            <div class="bg-amber-100 text-amber-800 font-bold p-1.5 rounded text-center shrink-0 w-12">
+                                <span class="block text-sm">12</span>
+                                <span class="block text-[9px] uppercase">Okt</span>
+                            </div>
+                            <div>
+                                <p class="font-bold text-slate-800">Rapat Koordinasi Pemuda & Karang Taruna</p>
+                                <p class="text-[10px] text-slate-500"><i class="fa-regular fa-clock"></i> 20:00 WITA - Kantor Desa</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- WIDGET: PETA WILAYAH (EMBEDDED OSM) -->
+                <div class="opensid-card">
+                    <div class="opensid-card-title">
+                        <span><i class="fa-solid fa-map-location-dot text-emerald-600 mr-2"></i> Peta Lokasi Kantor Desa</span>
+                    </div>
+                    <div class="p-2">
+                        <div class="w-full h-44 rounded overflow-hidden border border-slate-200">
+                            <iframe title="Peta Desa Montong Betok" class="w-full h-full" src="https://maps.google.com/maps?q=Kantor%20Desa%20Montong%20Betok%20Lombok%20Timur&t=&z=14&ie=UTF8&iwloc=&output=embed" frameborder="0" scrolling="no"></iframe>
+                        </div>
+                        <p class="text-[10px] text-slate-500 text-center mt-1.5"><i class="fa-solid fa-location-arrow text-emerald-600"></i> Jl. Raden Pulesari, Montong Betok</p>
+                    </div>
+                </div>
+
+                <!-- WIDGET: SINERGI PROGRAM -->
+                <div class="opensid-card">
+                    <div class="opensid-card-title">
+                        <span><i class="fa-solid fa-link text-emerald-600 mr-2"></i> Sinergi Program</span>
+                    </div>
+                    <div class="p-3 space-y-2 text-xs">
+                        <a href="https://lomboktimurkab.go.id" target="_blank" class="block bg-slate-100 hover:bg-emerald-50 p-2 rounded text-slate-800 font-bold border border-slate-200 flex items-center justify-between">
+                            <span>Portal Kab. Lombok Timur</span>
+                            <i class="fa-solid fa-external-link text-slate-400 text-[10px]"></i>
+                        </a>
+                        <a href="https://kemendesa.go.id" target="_blank" class="block bg-slate-100 hover:bg-emerald-50 p-2 rounded text-slate-800 font-bold border border-slate-200 flex items-center justify-between">
+                            <span>Kementerian Desa PDTT</span>
+                            <i class="fa-solid fa-external-link text-slate-400 text-[10px]"></i>
+                        </a>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-slate-900 text-slate-400 text-xs py-8 border-t-4 border-emerald-600 mt-10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-6">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-2">Pemerintah Desa Montong Betok</h4>
+                    <p class="leading-relaxed">Kecamatan Montong Gading, Kabupaten Lombok Timur, Provinsi Nusa Tenggara Barat 83664.</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-2">Kontak Pelayanan</h4>
+                    <p><i class="fa-solid fa-phone mr-1"></i> (0376) 876-632-199</p>
+                    <p><i class="fa-brands fa-whatsapp mr-1 text-emerald-500"></i> 0876-6321-99</p>
+                </div>
+                <div>
+                    <h4 class="text-white font-bold text-sm mb-2">Sistem Informasi Desa</h4>
+                    <p>Dikembangkan berbasis OpenSID - Platform Digital Desa Terintegrasi Republik Indonesia.</p>
+                </div>
+            </div>
+            <div class="border-t border-slate-800 pt-4 text-center text-[11px] text-slate-500">
+                <p>© 2026 Pemerintah Desa Montong Betok. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- MODAL DETAIL ARTIKEL BERITA -->
+    <div id="modal-berita" class="fixed inset-0 bg-slate-950/70 z-50 hidden flex items-center justify-center p-4 backdrop-blur-sm">
+        <div class="bg-white max-w-2xl w-full rounded-lg shadow-xl overflow-hidden max-h-[90vh] flex flex-col">
+            <div class="bg-emerald-900 text-white p-4 flex justify-between items-center">
+                <h3 id="modal-title" class="font-bold text-sm sm:text-base line-clamp-1">Detail Berita</h3>
+                <button onclick="closeModalBerita()" class="text-slate-300 hover:text-white"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="p-5 overflow-y-auto custom-scrollbar space-y-4 text-xs sm:text-sm text-slate-700">
+                <img id="modal-img" src="" class="w-full h-56 object-cover rounded" alt="Gambar Berita">
+                <div class="flex justify-between text-[11px] text-slate-400">
+                    <span id="modal-date"><i class="fa-regular fa-calendar"></i> -</span>
+                    <span id="modal-cat" class="bg-emerald-100 text-emerald-800 px-2 py-0.5 rounded font-bold">-</span>
+                </div>
+                <p id="modal-body" class="leading-relaxed"></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT LOGIC -->
+    <script>
+        const newsItems = [
+            {
+                id: 1,
+                title: "Gawe Desa Praja Yatim II Desa Montong Betok Berlangsung Khidmat",
+                category: "Kegiatan Desa",
+                date: "28 Sep 2026",
+                image: "https://images.unsplash.com/photo-1593113598332-cd288d649433?q=80&w=800&auto=format&fit=crop",
+                summary: "Pemerintah Desa Montong Betok bersama para tokoh agama merayakan Gawe Desa Praja Yatim II dengan menyalurkan santunan untuk puluhan anak yatim.",
+                content: "Pemerintah Desa Montong Betok menggelar acara tahunan 'Gawe Desa Praja Yatim II' bertempat di Balai Desa Montong Betok, Kecamatan Montong Gading. Kepala Desa Rony Farick Ziath, S.Pd.I menyampaikan apresiasi mendalam kepada seluruh warga dan donatur yang telah menyisihkan rezekinya demi kesejahteraan anak-anak yatim di lima wilayah dusun."
+            },
+            {
+                id: 2,
+                title: "Aksi Penghijauan Bersama Mahasiswa KKN & Karang Taruna Desa",
+                category: "Lingkungan",
+                date: "24 Sep 2026",
+                image: "https://images.unsplash.com/photo-1589923188900-85dae523342b?q=80&w=800&auto=format&fit=crop",
+                summary: "Penanaman 500 bibit pohon buah dan pelindung di sepanjang jalur irigasi Dusun Temubireng.",
+                content: "Dalam upaya menjaga ketersediaan sumber air dan mencegah erosi di area persawahan, Pemerintah Desa Montong Betok menginisiasi kegiatan penanaman pohon buah produktif bersama mahasiswa KKN dan Karang Taruna Desa."
+            },
+            {
+                id: 3,
+                title: "Penyaluran Bantuan Pangan (BAPANG) Kabupaten Lombok Timur",
+                category: "Bantuan Sosial",
+                date: "19 Sep 2026",
+                image: "https://images.unsplash.com/photo-1576267423445-b2e0074d68a4?q=80&w=800&auto=format&fit=crop",
+                summary: "Sebanyak 340 KPM di Desa Montong Betok menerima penyaluran beras BAPANG tahap ketiga.",
+                content: "Kaur TU & Umum Mariani mendampingi proses penyaluran Bantuan Pangan (BAPANG) kepada warga penerima manfaat yang terdata dalam DTKS di wilayah Desa Montong Betok."
+            }
+        ];
+
+        let pengaduanData = [
+            { id: 1, nama: "Hasan", isi: "Mohon perbaikan lampu jalan di jalur persawahan Dusun Lekong Rempung.", status: "Diproses" }
+        ];
+
+        window.onload = function() {
+            renderNewsFeed();
+            renderPengaduan();
+            initChartDusun();
+        };
+
+        /* Section Navigation Router */
+        function switchSection(sec) {
+            const sections = ['beranda', 'profil', 'layanan', 'apbd', 'statistik', 'berita', 'pengaduan'];
+            sections.forEach(s => {
+                const el = document.getElementById(`sec-${s}`);
+                if(el) el.classList.add('hidden');
+            });
+            const target = document.getElementById(`sec-${sec}`);
+            if(target) target.classList.remove('hidden');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        /* Render News Feeds */
+        function renderNewsFeed() {
+            const homeFeed = document.getElementById('feed-berita-home');
+            const fullFeed = document.getElementById('feed-berita-full');
+
+            const html = newsItems.map(item => `
+                <div class="py-3 flex flex-col sm:flex-row gap-4 items-start cursor-pointer group" onclick="openModalBerita(${item.id})">
+                    <img src="${item.image}" alt="${item.title}" class="w-full sm:w-32 h-24 object-cover rounded border border-slate-200 shrink-0">
+                    <div class="space-y-1">
+                        <div class="flex items-center gap-2 text-[10px]">
+                            <span class="bg-emerald-100 text-emerald-800 font-bold px-2 py-0.5 rounded">${item.category}</span>
+                            <span class="text-slate-400"><i class="fa-regular fa-calendar"></i> ${item.date}</span>
+                        </div>
+                        <h3 class="font-bold text-slate-800 group-hover:text-emerald-700 transition text-sm leading-snug">${item.title}</h3>
+                        <p class="text-xs text-slate-500 line-clamp-2">${item.summary}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            if(homeFeed) homeFeed.innerHTML = html;
+            if(fullFeed) fullFeed.innerHTML = html;
+        }
+
+        /* Modal News Detail */
+        function openModalBerita(id) {
+            const item = newsItems.find(n => n.id === id);
+            if(!item) return;
+
+            document.getElementById('modal-title').innerText = item.title;
+            document.getElementById('modal-img').src = item.image;
+            document.getElementById('modal-date').innerText = item.date;
+            document.getElementById('modal-cat').innerText = item.category;
+            document.getElementById('modal-body').innerText = item.content;
+
+            document.getElementById('modal-berita').classList.remove('hidden');
+        }
+
+        function closeModalBerita() {
+            document.getElementById('modal-berita').classList.add('hidden');
+        }
+
+        /* Hero Carousel Switch */
+        function setHero(index) {
+            const hero = newsItems[index];
+            if(!hero) return;
+
+            document.getElementById('hero-img').src = hero.image;
+            document.getElementById('hero-title').innerText = hero.title;
+            document.getElementById('hero-desc').innerText = hero.summary;
+            document.getElementById('hero-badge').innerText = hero.category;
+        }
+
+        /* Submit Form Surat */
+        function submitSuratOnline(e) {
+            e.preventDefault();
+            const resi = "RESI-MB" + Math.floor(1000 + Math.random() * 9000);
+            alert(`Permohonan Surat Berhasil Terkirim!\n\nNomor Resi Tracking Anda: ${resi}\n\nSilakan simpan nomor resi ini untuk mengecek status permohonan ke Kantor Desa Montong Betok.`);
+            document.getElementById('form-surat').reset();
+        }
+
+        /* Submit Pengaduan */
+        function submitPengaduan(e) {
+            e.preventDefault();
+            const nama = document.getElementById('pengaduan-nama').value;
+            const isi = document.getElementById('pengaduan-isi').value;
+
+            pengaduanData.unshift({
+                id: Date.now(),
+                nama: nama,
+                isi: isi,
+                status: "Menunggu Tanggapan"
+            });
+
+            document.getElementById('pengaduan-nama').value = '';
+            document.getElementById('pengaduan-isi').value = '';
+            renderPengaduan();
+        }
+
+        function renderPengaduan() {
+            const container = document.getElementById('list-pengaduan');
+            if(!container) return;
+
+            container.innerHTML = pengaduanData.map(p => `
+                <div class="p-3 bg-slate-50 border rounded text-xs space-y-1">
+                    <div class="flex justify-between font-bold text-slate-800">
+                        <span>${p.nama}</span>
+                        <span class="bg-amber-100 text-amber-800 text-[10px] px-2 py-0.5 rounded">${p.status}</span>
+                    </div>
+                    <p class="text-slate-600">${p.isi}</p>
+                </div>
+            `).join('');
+        }
+
+        /* Chart Demografi Dusun */
+        function initChartDusun() {
+            const ctx = document.getElementById('chartDusun');
+            if(!ctx) return;
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Lekong Rempung', 'Mujur', 'Temubireng', 'Otak Desa', 'Temayang'],
+                    datasets: [{
+                        label: 'Jumlah Jiwa',
+                        data: [1210, 1140, 1080, 990, 1000],
+                        backgroundColor: '#059669',
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+    </script>
+</body>
+</html>
