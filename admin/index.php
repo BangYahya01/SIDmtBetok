@@ -80,8 +80,11 @@ $recentAduan = $stmtAduan->fetchAll();
             <a href="pengaduan.php" class="text-slate-600 hover:bg-slate-100 px-3 py-2 rounded-lg flex items-center gap-1.5 shrink-0">
                 <i class="fa-solid fa-comments text-emerald-600"></i> Respon Pengaduan Warga
             </a>
-            <a href="pengaduan.php" class="text-slate-600 hover:bg-slate-100 px-3 py-2 rounded-lg flex items-center gap-1.5 shrink-0">
-                <i class="fa-solid fa-comments text-emerald-600"></i> Kelola Staf Desa
+            <a href="staf.php" class="text-slate-600 hover:bg-slate-100 px-3 py-2 rounded-lg flex items-center gap-1.5 shrink-0">
+                <i class="fa-solid fa-user-tie text-emerald-600"></i> Kelola Staf Desa
+            </a>
+            <a href="ttd.php" class="text-slate-600 hover:bg-slate-100 px-3 py-2 rounded-lg flex items-center gap-1.5 shrink-0">
+                <i class="fa-solid fa-signature text-violet-600"></i> Tanda Tangan Digital
             </a>
         </div>
     </div>
