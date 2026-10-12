@@ -4,7 +4,6 @@ $pdo = getDB();
 $stmt = $pdo->query("SELECT * FROM lokasi ORDER BY kategori, nama");
 $lokasi = $stmt->fetchAll();
 $title = "Peta Wilayah — Desa Montong Betok";
-
 ?>
 <section class="py-12 bg-gradient-to-br from-emerald-900 to-slate-900 text-white">
   <div class="max-w-6xl mx-auto px-4">

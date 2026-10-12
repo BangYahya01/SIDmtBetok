@@ -149,4 +149,26 @@ $recentNews = $stmtRecent->fetchAll();
         </a>
     </div>
 
+    <!-- WIDGET SIG: DATA LOKASI -->
+    <div class="card-custom p-3.5">
+        <h3 class="text-xs font-bold text-slate-900 border-b border-slate-200 pb-2 mb-2.5 uppercase tracking-wide flex items-center">
+            <i class="fa-solid fa-map-location-dot text-violet-700 mr-1.5"></i> Peta SIG Desa
+        </h3>
+        <div class="space-y-2 text-xs">
+            <a href="index.php?page=peta" class="flex items-center gap-2 p-2 bg-violet-50 border border-violet-200 hover:bg-violet-100 transition rounded">
+                <i class="fa-solid fa-globe text-violet-700"></i>
+                <span class="font-bold text-violet-900">Lihat Peta Interaktif</span>
+                <span class="text-[10px] text-violet-600 ml-auto">6 titik</span>
+            </a>
+            <?php
+            $sigPoints = $pdo->query("SELECT nama, kategori FROM lokasi ORDER BY kategori, nama LIMIT 5")->fetchAll();
+            foreach ($sigPoints as $pt): ?>
+            <div class="flex justify-between items-center text-slate-600 border-b border-slate-100 last:border-0 pb-1 last:pb-0">
+                <span><?= htmlspecialchars($pt['nama']) ?></span>
+                <span class="text-[10px] font-mono text-violet-600 uppercase"><?= htmlspecialchars($pt['kategori']) ?></span>
+            </div>
+            <?php endforeach; ?>
+        </div>
+    </div>
+
 </aside>

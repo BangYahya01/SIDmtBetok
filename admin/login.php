@@ -6,7 +6,7 @@ $pdo = getDB();
 
 $error = null;
 
-if (isset($_SESSION['admin_logged_in'])) {
+if (isset($_SESSION['admin_logged'])) {
     header('Location: index.php');
     exit;
 }
@@ -20,7 +20,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = $stmt->fetch();
 
     if ($user && password_verify($password, $user['password'])) {
-        $_SESSION['admin_logged_in'] = true;
+        $_SESSION['admin_logged'] = true;
         $_SESSION['admin_id'] = $user['id'];
         $_SESSION['admin_name'] = $user['nama'];
         $_SESSION['admin_role'] = $user['role'];

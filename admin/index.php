@@ -1,7 +1,7 @@
 <?php
 // admin/index.php
 session_start();
-if (!isset($_SESSION['admin_logged_in'])) {
+if (!isset($_SESSION['admin_logged'])) {
     header('Location: login.php');
     exit;
 }
@@ -14,6 +14,8 @@ $totalSurat = $pdo->query("SELECT COUNT(*) FROM permohonan_surat")->fetchColumn(
 $suratPending = $pdo->query("SELECT COUNT(*) FROM permohonan_surat WHERE status = 'Menunggu Verifikasi'")->fetchColumn();
 $totalBerita = $pdo->query("SELECT COUNT(*) FROM berita")->fetchColumn();
 $totalAduan = $pdo->query("SELECT COUNT(*) FROM pengaduan")->fetchColumn();
+$lokasiCount = $pdo->query("SELECT COUNT(*) FROM lokasi")->fetchColumn();
+$poligonCount = $pdo->query("SELECT COUNT(*) FROM poligon_dusun")->fetchColumn();
 
 // Permohonan Surat Terbaru
 $stmtSurat = $pdo->query("SELECT * FROM permohonan_surat ORDER BY id DESC LIMIT 5");
@@ -130,6 +132,17 @@ $recentAduan = $stmtAduan->fetchAll();
                 </div>
                 <div class="w-12 h-12 rounded-xl bg-rose-100 text-rose-700 flex items-center justify-center text-xl">
                     <i class="fa-solid fa-comments"></i>
+                </div>
+            </div>
+
+            <div class="bg-white p-5 rounded-xl border border-violet-200 shadow-sm flex items-center justify-between">
+                <div>
+                    <span class="text-xs font-semibold text-slate-500 block">Titik SIG &amp; Poligon</span>
+                    <span class="text-2xl font-black text-violet-700 font-mono"><?= $lokasiCount; ?> / <?= $poligonCount; ?></span>
+                    <span class="text-[10px] text-slate-400 block mt-0.5">Lokasi &amp; batas dusun</span>
+                </div>
+                <div class="w-12 h-12 rounded-xl bg-violet-100 text-violet-700 flex items-center justify-center text-xl">
+                    <i class="fa-solid fa-map-location-dot"></i>
                 </div>
             </div>
         </div>

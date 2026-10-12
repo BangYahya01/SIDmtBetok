@@ -365,6 +365,19 @@ function initDatabase($pdo) {
         }
     }
 
+    // 8. Tabel Poligon Dusun (SIG Layer)
+    $pdo->exec("CREATE TABLE IF NOT EXISTS poligon_dusun (
+        id {$idColumn},
+        nama TEXT NOT NULL,
+        geojson TEXT,
+        warna TEXT DEFAULT '#15803d',
+        tanggal {$timestampDefault}
+    )");
+    $pgCount = $pdo->query("SELECT COUNT(*) FROM poligon_dusun")->fetchColumn();
+    if ((int)$pgCount === 0) {
+        $pdo->exec("INSERT INTO poligon_dusun (nama, geojson, warna) VALUES ('Dusun Lekong Rempung', '{\"type\":\"Polygon\",\"coordinates\":[[[116.400,-8.535],[116.410,-8.535],[116.410,-8.525],[116.400,-8.525],[116.400,-8.535]]]}', '#15803d')");
+    }
+
     // 7. Tabel SIG Lokasi
     $pdo->exec("CREATE TABLE IF NOT EXISTS lokasi (
         id {$idColumn},
